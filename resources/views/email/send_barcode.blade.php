@@ -110,8 +110,17 @@
 
                 <div>
                     <?php \Storage::disk('public')->put($user->barcode . '.png', base64_decode(DNS2D::getBarcodePNG($user->barcode, 'QRCODE', 20, 20))); ?>
-                    {{-- <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($user->barcode, 'QRCODE', 10, 10) }}"
-                        alt="{{ $user->barcode }}" class="mx-auto mb-2" /> --}}
+
+                    {{-- Untuk Production --}}
+                    <img style="max-width: 120px; height: fit-content"
+                        src={{ 'https://regis.isseindonesia.com/storage/' . $user->barcode . '.png' }} alt="barcode">
+
+                    {{-- Untuk Local --}}
+                    {{-- <img style="max-width: 100px; height: fit-content; margin-bottom: 8px"
+                        src={{ asset('storage/' . $ticket->barcode . '.png') }} alt="#{{ $ticket->barcode }}">
+                    <div style="font-weight: bold; margin: 4px">Ticket {{ $i }}</div>
+                    <div style="font-weight: bold;">#{{ $ticket->barcode }}</div> --}}
+
                     <div class="text-2xl font-bold">{{ $user->barcode }}</div>
                     <div class="warna-biru-01">{{ $user->name }}</div>
                     <div class="warna-biru-01">{{ $user->email }}</div>
