@@ -2,8 +2,6 @@
     feather.replace();
 </script>
 
-@vite('resources/js/footer.js')
-
 {{-- Alert --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
