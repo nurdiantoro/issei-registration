@@ -15,5 +15,6 @@ class EmailController extends Controller
         // dd($user->email);
 
         Mail::to($user->email)->send(new SendBarcode($user));
+        return redirect('/');
     }
 }
