@@ -16,17 +16,17 @@ class AuthController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:6',
+            'password' => 'required',
         ]);
 
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');
 
         if (Auth::attempt($credentials, $remember)) {
-            return redirect()->intended('/dashboard')->with('success', 'Login berhasil');
+            return redirect()->intended('/profile')->with('success', 'Login berhasil');
         }
 
-        return back()->withErrors(['email' => 'Email atau password salah']);
+        return redirect()->back()->with('error', 'Login gagal');
     }
 
     public function logout()

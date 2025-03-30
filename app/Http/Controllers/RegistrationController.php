@@ -51,6 +51,6 @@ class RegistrationController extends Controller
 
         Auth::login($user);
 
-        return redirect()->url('/profile');
+        return redirect('/');
     }
 }

@@ -10,7 +10,7 @@
             <div class="bg-white p-4 xl:p-14 rounded-xl w-full">
                 <h1 class="text-4xl text-center font-bold mb-4 text-warna-biru-01">Login</h1>
 
-                <form action="{{ url('/login') }}" method="POST" class="flex flex-col gap-6">
+                <form action="{{ url('/login/check') }}" method="POST" class="flex flex-col gap-6">
                     @csrf
                     <div class="flex flex-col w-full">
                         <label for="email" class="mb-2 cursor-pointer text-slate-800 font-semibold">Email</label>
@@ -33,6 +33,13 @@
                         </div>
                     </div>
 
+                    @if (session('error'))
+                        <div class="text-sm text-red-600">
+                            Invalid email or password.
+                        </div>
+                    @endif
+
+
                     <div class="flex flex-row gap-2">
                         <input type="checkbox" name="remember" id="remember">
                         <label for="remember" class="text-sm cursor-pointer text-slate-800 font-semibold">Remember
@@ -43,6 +50,7 @@
                         class="bg-warna-biru-01/90 px-4 py-3 text-white rounded-lg cursor-pointer mt-3 hover:bg-warna-biru-01">Login</button>
                 </form>
 
+                {{-- forgot password --}}
                 {{-- <div>
                     <p class="text-sm text-center mt-4">Forgot your password? <a href="/forgot-password"
                             class="text-warna-biru-01 hover:text-warna-biru-02">Reset Password</a></p>
