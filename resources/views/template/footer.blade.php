@@ -9,7 +9,7 @@
     <script>
         Swal.fire({
             title: 'Email Already Exists!',
-            text: 'Please use another email or login',
+            // text: 'Here is your event ticket, or re-register using a different email.',
             icon: 'error',
             confirmButtonText: 'Back',
             confirmButtonColor: '#3085d6',

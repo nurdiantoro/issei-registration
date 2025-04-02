@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class FrontendController extends Controller
 {
-    public function profile()
+    public function profile($uuid)
     {
-        $user = Auth::user();
+        $user = User::where('id', $uuid)->first();
         return view('profile', compact('user'));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 
 class RegistrationController extends Controller
@@ -16,8 +17,9 @@ class RegistrationController extends Controller
 
     public function create(Request $request)
     {
-        if (User::where('email', $request->email)->exists()) {
-            return back()->with('email_exists', 'Email already exists');
+        $existsUser = User::where('email', $request->email)->first();
+        if ($existsUser != null) {
+            return redirect('/' . $existsUser->id)->with('email_exists', 'Email already exists');
         }
 
         // Validate form
@@ -25,7 +27,6 @@ class RegistrationController extends Controller
             'name'          => ['required', 'string', 'max:255'],
             'salutation'    => ['required', 'string', 'max:255'],
             'email'         => ['required', 'string', 'max:255', 'email',  'unique:users'],
-            'password'      => ['required', 'string', 'min:8', 'confirmed'],
             'telephone'     => ['required', 'string', 'max:255'],
             'company'       => ['required', 'string', 'max:255'],
             'job'           => ['required', 'string', 'max:255'],
@@ -43,13 +44,11 @@ class RegistrationController extends Controller
             'salutation' => $request->salutation,
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => bcrypt('password'),
             'telephone' => $request->telephone,
             'company' => $request->company,
             'job' => $request->job,
         ]);
-
-        Auth::login($user);
 
         return redirect('/send/barcode/' . $user->id);
     }

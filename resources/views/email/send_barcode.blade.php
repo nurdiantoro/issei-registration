@@ -88,6 +88,10 @@
             color: #fff;
         }
 
+        .bg-white {
+            background-color: #fff;
+        }
+
         .mt-4 {
             margin-top: 1rem;
         }
@@ -112,7 +116,7 @@
                     <?php \Storage::disk('public')->put($user->barcode . '.png', base64_decode(DNS2D::getBarcodePNG($user->barcode, 'QRCODE', 20, 20))); ?>
 
                     {{-- Untuk Production --}}
-                    <img style="max-width: 120px; height: fit-content"
+                    <img style="max-width: 120px; height: fit-content" class="bg-white"
                         src={{ 'https://regis.isseindonesia.com/storage/' . $user->barcode . '.png' }} alt="barcode">
 
                     {{-- Untuk Local --}}
@@ -125,8 +129,8 @@
                     <div class="warna-biru-01">{{ $user->name }}</div>
                     <div class="warna-biru-01">{{ $user->email }}</div>
 
-                    <a href="{{ route('download.pdf') }}"
-                        class="px-4 py-3 rounded-lg bg-warna-biru-01-80 hover:bg-warna-biru-01 text-white block mt-4">Download
+                    <a href="{{ url('/download/pdf/' . $user->id) }}"
+                        class="px-4 py-3 rounded-lg bg-warna-biru-01-80 hover:bg-warna-biru-01 text-white block mt-4 ">Download
                         PDF</a>
                 </div>
 

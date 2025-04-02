@@ -19,7 +19,7 @@
                     <div class="text-warna-biru-01">{{ $user->name }}</div>
                     <div class="text-warna-biru-01">{{ $user->email }}</div>
 
-                    <a href="{{ route('download.pdf') }}"
+                    <a href="{{ url('/download/pdf/' . $user->id) }}"
                         class="px-4 py-3 rounded-lg bg-warna-biru-01/80 hover:bg-warna-biru-01 text-white block mt-4">Download
                         PDF</a>
                 </div>
@@ -33,7 +33,13 @@
                         information</p>
                 </div>
             </div>
+
+            <a href="/registration"
+                class="px-4 py-3 rounded-lg bg-warna-biru-01/80 hover:bg-warna-biru-01 text-white text-sm">Register
+                Another
+                Email</a>
         </div>
+
     </div>
 </main>
 

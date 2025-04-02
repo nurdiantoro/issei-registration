@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
-    public function SendBarcode($id)
+    public function SendBarcode($uuid)
     {
-        $user = User::findOrFail($id);
+        $user = User::where('id', $uuid)->first();
         // dd($user->email);
 
         Mail::to($user->email)->send(new SendBarcode($user));
-        return redirect('/');
+        return redirect('/' . $uuid)->with('success', 'Email berhasil dikirim');
     }
 }

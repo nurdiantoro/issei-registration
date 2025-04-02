@@ -67,7 +67,9 @@
                             class="px-4 py-2 rounded-lg bg-gray-200 outline-2 outline-gray-200 focus:outline-warna-orange-01 focus:bg-gray-100 focus:ring-0 hover:bg-gray-100"
                             placeholder="">
                     </div>
-                    <div class="flex flex-col w-full relative">
+
+                    {{-- Password --}}
+                    {{-- <div class="flex flex-col w-full relative">
                         <label for="password" class="mb-2 cursor-pointer text-slate-800 font-semibold">Password</label>
 
                         <div class="relative">
@@ -79,16 +81,11 @@
                             <i data-feather="eye-off" id="togglePasswordOff"
                                 class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-400 hidden"></i>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <button type="submit"
                         class="bg-warna-biru-01/90 px-4 py-3 text-white rounded-lg cursor-pointer mt-3 hover:bg-warna-biru-01">Register</button>
                 </form>
-
-                <div>
-                    <p class="text-sm text-center mt-4">Already have an account? <a href="/login"
-                            class="text-warna-biru-01 hover:text-warna-biru-02">Login</a></p>
-                </div>
             </div>
         </div>
     </div>
