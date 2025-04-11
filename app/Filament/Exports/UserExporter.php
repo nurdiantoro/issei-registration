@@ -20,13 +20,10 @@ class UserExporter extends Exporter
             ExportColumn::make('salutation'),
             ExportColumn::make('name'),
             ExportColumn::make('email'),
-            ExportColumn::make('email_verified_at'),
-            ExportColumn::make('role_id'),
             ExportColumn::make('telephone'),
             ExportColumn::make('company'),
             ExportColumn::make('job'),
             ExportColumn::make('created_at'),
-            ExportColumn::make('updated_at'),
         ];
     }
 

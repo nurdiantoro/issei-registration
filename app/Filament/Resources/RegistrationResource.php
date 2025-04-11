@@ -8,6 +8,7 @@ use App\Filament\Resources\RegistrationResource\Pages\CreateRegistration;
 use App\Filament\Resources\RegistrationResource\Pages\EditRegistration;
 use App\Filament\Resources\RegistrationResource\Pages\ListRegistrations;
 use App\Models\User;
+use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -91,6 +92,10 @@ class RegistrationResource extends Resource
             ->headerActions([
                 ExportAction::make()
                     ->exporter(UserExporter::class)
+                    ->formats([
+                        ExportFormat::Xlsx,
+                    ])
+                    ->fileName(now()->format('d-m-Y') . ' Registration Database ISSEI2025.xlsx')
             ]);
     }
 
