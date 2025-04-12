@@ -18,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
         $loader = AliasLoader::getInstance();
         $loader->alias('DNS1D', \Milon\Barcode\Facades\DNS1DFacade::class);
         $loader->alias('DNS2D', \Milon\Barcode\Facades\DNS2DFacade::class);
+
+        $loader->alias('Captcha', \Mews\Captcha\Facades\Captcha::class);
     }
 
     /**

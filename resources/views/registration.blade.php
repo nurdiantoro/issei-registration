@@ -24,54 +24,72 @@
                         <div class="flex flex-row gap-2">
                             <div class="flex-1">
                                 <input required type="radio" name="salutation" class="hidden peer" id="salutation_mr"
-                                    value="Mr.">
+                                    {{ old('salutation') == 'Mr.' ? 'checked' : '' }} value="Mr.">
                                 <label for="salutation_mr"
                                     class="cursor-pointer mr-2 w-full block p-2 rounded text-warna-biru-01 bg-gray-100 text-center hover:bg-gray-200 peer-checked:bg-warna-biru-01 peer-checked:hover:bg-warna-biru-01 peer-checked:text-white peer-checked:hover:text-white">Mr.</label>
                             </div>
                             <div class="flex-1">
                                 <input required type="radio" name="salutation" class="hidden peer" id="salutation_ms"
-                                    value="Ms.">
+                                    {{ old('salutation') == 'Ms.' ? 'checked' : '' }} value="Ms.">
                                 <label for="salutation_ms"
                                     class="cursor-pointer mr-2 w-full block p-2 rounded text-warna-biru-01 bg-gray-100 text-center hover:bg-gray-200 peer-checked:bg-warna-biru-01 peer-checked:hover:bg-warna-biru-01 peer-checked:text-white peer-checked:hover:text-white">Ms.</label>
                             </div>
                             <div class="flex-1">
                                 <input required type="radio" name="salutation" class="hidden peer" id="salutation_mrs"
-                                    value="Mrs.">
+                                    {{ old('salutation') == 'Mrs.' ? 'checked' : '' }} value="Mrs.">
                                 <label for="salutation_mrs"
                                     class="cursor-pointer mr-2 w-full block p-2 rounded text-warna-biru-01 bg-gray-100 text-center hover:bg-gray-200 peer-checked:bg-warna-biru-01 peer-checked:hover:bg-warna-biru-01 peer-checked:text-white peer-checked:hover:text-white">Mrs.</label>
                             </div>
                         </div>
+                        @error('salutation')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col w-full">
                         <label for="name" class="mb-2 cursor-pointer text-slate-800 font-semibold">Full Name</label>
-                        <input required type="text" name="name" id="name"
+                        <input required type="text" value="{{ old('name') }}" name="name" id="name"
                             class="px-4 py-2 rounded-lg bg-gray-200 outline-2 outline-gray-200 focus:outline-warna-orange-01 focus:bg-gray-100 focus:ring-0 hover:bg-gray-100"
                             placeholder="Your Name">
+                        @error('name')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col w-full">
                         <label for="email" class="mb-2 cursor-pointer text-slate-800 font-semibold">Email</label>
-                        <input required type="text" name="email" id="email"
+                        <input required type="text" value="{{ old('email') }}" name="email" id="email"
                             class="px-4 py-2 rounded-lg bg-gray-200 outline-2 outline-gray-200 focus:outline-warna-orange-01 focus:bg-gray-100 focus:ring-0 hover:bg-gray-100"
                             placeholder="example@email.com">
+                        @error('email')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col w-full">
                         <label for="telephone" class="mb-2 cursor-pointer text-slate-800 font-semibold">Phone
                             Number</label>
-                        <input required type="text" name="telephone" id="telephone"
+                        <input required type="text" value="{{ old('telephone') }}" name="telephone" id="telephone"
                             class="px-4 py-2 rounded-lg bg-gray-200 outline-2 outline-gray-200 focus:outline-warna-orange-01 focus:bg-gray-100 focus:ring-0 hover:bg-gray-100"
                             placeholder="">
+                        @error('telephone')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col w-full">
                         <label for="company" class="mb-2 cursor-pointer text-slate-800 font-semibold">Company</label>
-                        <input required type="text" name="company" id="company"
+                        <input required type="text" value="{{ old('company') }}" name="company" id="company"
                             class="px-4 py-2 rounded-lg bg-gray-200 outline-2 outline-gray-200 focus:outline-warna-orange-01 focus:bg-gray-100 focus:ring-0 hover:bg-gray-100"
                             placeholder="">
+                        @error('company')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col w-full">
                         <label for="job" class="mb-2 cursor-pointer text-slate-800 font-semibold">Job Title</label>
-                        <input required type="text" name="job" id="job"
+                        <input required type="text" value="{{ old('job') }}" name="job" id="job"
                             class="px-4 py-2 rounded-lg bg-gray-200 outline-2 outline-gray-200 focus:outline-warna-orange-01 focus:bg-gray-100 focus:ring-0 hover:bg-gray-100"
                             placeholder="">
+                        @error('job')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Password --}}
@@ -88,6 +106,21 @@
                                 class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-400 hidden"></i>
                         </div>
                     </div> --}}
+
+                    {{-- Captcha --}}
+                    <div class="flex flex-col w-full">
+                        <label for="job" class="mb-2 cursor-pointer text-slate-800 font-semibold">Captcha</label>
+
+                        <img src="{{ captcha_src('flat') }}" alt="captcha" class="w-40">
+                        <div class="mt-2"></div>
+                        <input type="text" name="captcha"
+                            class="px-4 py-2 rounded-lg bg-gray-200 outline-2 outline-gray-200 focus:outline-warna-orange-01 focus:bg-gray-100 focus:ring-0 hover:bg-gray-100 @error('captcha') is-invalid @enderror"
+                            placeholder="Please Insert Captcha">
+                        @error('captcha')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
+
 
                     <button type="submit"
                         class="bg-warna-biru-01/90 px-4 py-3 text-white rounded-lg cursor-pointer mt-3 hover:bg-warna-biru-01">Register</button>

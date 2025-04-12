@@ -23,13 +23,16 @@ class RegistrationController extends Controller
         }
 
         // Validate form
-        Validator::make($request->all(), [
+        $request->validate([
             'name'          => ['required', 'string', 'max:255'],
             'salutation'    => ['required', 'string', 'max:255'],
-            'email'         => ['required', 'string', 'max:255', 'email',  'unique:users'],
+            'email'         => ['required', 'string', 'max:255', 'email', 'unique:users'],
             'telephone'     => ['required', 'string', 'max:255'],
             'company'       => ['required', 'string', 'max:255'],
             'job'           => ['required', 'string', 'max:255'],
+            'captcha'       => ['required', 'captcha'],
+        ], [
+            'captcha.captcha' => 'Captcha is invalid'
         ]);
 
         // Generate unique barcode
