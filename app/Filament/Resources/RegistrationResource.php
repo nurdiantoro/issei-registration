@@ -68,11 +68,17 @@ class RegistrationResource extends Resource
             ->columns([
                 TextColumn::make('barcode')
                     ->searchable(),
+                TextColumn::make('salutation')
+                    ->searchable(),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('email')
                     ->searchable(),
                 TextColumn::make('telephone')
+                    ->searchable(),
+                TextColumn::make('company')
+                    ->searchable(),
+                TextColumn::make('job')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->label('Registration Date')
