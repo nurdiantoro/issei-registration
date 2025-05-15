@@ -15,6 +15,6 @@ class EmailController extends Controller
         // dd($user->email);
 
         Mail::to($user->email)->send(new SendBarcode($user));
-        return redirect('/' . $uuid)->with('success', 'Email berhasil dikirim');
+        return redirect('user/' . $uuid)->with('success', 'Email berhasil dikirim');
     }
 }

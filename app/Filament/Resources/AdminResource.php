@@ -9,6 +9,7 @@ use App\Filament\Resources\AdminResource\Pages\ListAdmins;
 use App\Filament\Resources\AdminResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -38,10 +39,13 @@ class AdminResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-                TextInput::make('role_id')
+                Select::make('role_id')
                     ->required()
-                    ->maxLength(255)
-                    ->default('user'),
+                    ->options([
+                        'root' => 'root',
+                        'user' => 'user',
+                        'admin' => 'admin',
+                    ]),
                 TextInput::make('password')
                     ->password()
                     ->required()
