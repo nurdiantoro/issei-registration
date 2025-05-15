@@ -19,7 +19,7 @@ class RegistrationController extends Controller
     {
         $existsUser = User::where('email', $request->email)->first();
         if ($existsUser != null) {
-            return redirect('/' . $existsUser->id)->with('email_exists', 'Email already exists');
+            return redirect('user/' . $existsUser->id)->with('email_exists', 'Email already exists');
         }
 
         // Validate form
