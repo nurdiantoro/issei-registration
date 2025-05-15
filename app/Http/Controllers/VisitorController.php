@@ -11,7 +11,8 @@ class VisitorController extends Controller
 {
     public function index()
     {
-        return view('checkin');
+        $visitors = Visitor::orderBy('created_at', 'desc')->limit(10)->get();
+        return view('checkin', compact('visitors'));
     }
 
     public function store(Request $request)

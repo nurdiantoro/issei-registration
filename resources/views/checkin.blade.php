@@ -34,6 +34,35 @@
                 </form>
             </div>
         </div>
+        <div class="w-full md:w-1/2 lg:w-1/3 z-20 mt-12 ">
+            <p class="text-white text-center text-2xl font-bold mb-2">Recent Visitor</p>
+            <table id="example" class="w-full bg-white text-left border rounded overflow-hidden">
+                <thead>
+                    <tr>
+                        <th class="border border-slate-500 bg-warna-biru-01 text-white p-2">Barcode</th>
+                        <th class="border border-slate-500 bg-warna-biru-01 text-white p-2">Name</th>
+                        <th class="border border-slate-500 bg-warna-biru-01 text-white p-2">Gate</th>
+                        <th class="border border-slate-500 bg-warna-biru-01 text-white p-2">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($visitors as $visitor)
+                        <tr>
+                            <td class="border border-slate-500 p-2">{{ $visitor->barcode }}</td>
+                            <td class="border border-slate-500 p-2">{{ $visitor->name }}</td>
+                            <td class="border border-slate-500 p-2">{{ $visitor->gate }}</td>
+                            <td class="border border-slate-500 p-2">{{ $visitor->created_at }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            <a href="{{ url('/dashboard/registrations') }}" target="_blank">
+                <div
+                    class="bg-warna-biru-01/90 px-4 py-3 text-white rounded-lg cursor-pointer mt-3 hover:bg-warna-biru-01 text-center">
+                    See More</div>
+            </a>
+        </div>
     </div>
 </main>
 
