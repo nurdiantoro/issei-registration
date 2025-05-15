@@ -23,6 +23,7 @@ class UserExporter extends Exporter
             ExportColumn::make('telephone'),
             ExportColumn::make('company'),
             ExportColumn::make('job'),
+            ExportColumn::make('interest'),
             ExportColumn::make('created_at'),
         ];
     }
