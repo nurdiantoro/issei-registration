@@ -15,7 +15,7 @@
 
             <div class="bg-white p-4 xl:p-14 rounded-xl w-full">
                 <h1 class="text-4xl text-center font-bold mb-4 text-warna-biru-01">Check In</h1>
-                <h2 class="text-2xl text-center font-bold mb-4 text-warna-biru-01">Gate 1</h2>
+                <h2 class="text-2xl text-center font-bold mb-4 text-warna-biru-01">{{ Auth::user()->name }}</h2>
 
                 <form action="{{ url('/check-in/store') }}" method="POST" class="flex flex-col gap-6" id="barcodeForm">
                     @csrf

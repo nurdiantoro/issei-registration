@@ -21,8 +21,19 @@ Route::post('/registration/create', [RegistrationController::class, 'create']);
 Route::get('/user/{uuid}', [FrontendController::class, 'profile']);
 Route::get('/download/pdf/{uuid}', [PdfController::class, 'download'])->name('download.pdf');
 
-Route::get('/check-in', [VisitorController::class, 'index'])->name('check-in.index');
-Route::post('/check-in/store', [VisitorController::class, 'store'])->name('check-in.store');
+Route::middleware('guest')->group(
+    function () {
+        // Login
+        Route::get('/login',        [AuthController::class, 'index'])->name('login');
+        Route::post('/login/check', [AuthController::class, 'login'])->name('login.check');
+    }
+);
+Route::middleware('auth')->group(
+    function () {
+        Route::get('/check-in', [VisitorController::class, 'index'])->name('check-in.index');
+        Route::post('/check-in/store', [VisitorController::class, 'store'])->name('check-in.store');
+    }
+);
 
 
 // Email

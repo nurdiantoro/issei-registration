@@ -23,7 +23,7 @@ class AuthController extends Controller
         $remember = $request->has('remember');
 
         if (Auth::attempt($credentials, $remember)) {
-            return redirect()->intended('/profile')->with('success', 'Login berhasil');
+            return redirect()->intended('/check-in');
         }
 
         return redirect()->back()->with('error', 'Login gagal');
