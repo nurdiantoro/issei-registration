@@ -91,21 +91,20 @@
                             <div class="text-red-500 text-sm">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    {{-- Password --}}
-                    {{-- <div class="flex flex-col w-full relative">
-                        <label for="password" class="mb-2 cursor-pointer text-slate-800 font-semibold">Password</label>
-
-                        <div class="relative">
-                            <input required type="password" name="password" id="password"
-                                class="px-4 py-2 rounded-lg bg-gray-200 outline-2 outline-gray-200 focus:outline-warna-orange-01 focus:bg-gray-100 focus:ring-0 hover:bg-gray-100 w-full"
-                                placeholder="">
-                            <i data-feather="eye" id="togglePasswordOn"
-                                class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-400"></i>
-                            <i data-feather="eye-off" id="togglePasswordOff"
-                                class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-400 hidden"></i>
-                        </div>
-                    </div> --}}
+                    <div class="flex flex-col w-full">
+                        <label for="job" class="mb-2 cursor-pointer text-slate-800 font-semibold">Interest
+                            to</label>
+                        <select name="interest" id="interest" required
+                            class="px-4 py-2 rounded-lg bg-gray-200 outline-2 outline-gray-200 focus:outline-warna-orange-01 focus:bg-gray-100 focus:ring-0 hover:bg-gray-100">
+                            <option disabled hidden selected>Select One</option>
+                            <option value="Seminar">Seminar</option>
+                            <option value="Exhibition">Exhibition</option>
+                            <option value="Seminar & Exhibition">Seminar & Exhibition</option>
+                        </select>
+                        @error('interest')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     {{-- Captcha --}}
                     <div class="flex flex-col w-full">
@@ -120,7 +119,6 @@
                             <div class="text-red-500 text-sm">{{ $message }}</div>
                         @enderror
                     </div>
-
 
                     <button type="submit"
                         class="bg-warna-biru-01/90 px-4 py-3 text-white rounded-lg cursor-pointer mt-3 hover:bg-warna-biru-01">Register</button>

@@ -30,6 +30,7 @@ class RegistrationController extends Controller
             'telephone'     => ['required', 'string', 'max:255'],
             'company'       => ['required', 'string', 'max:255'],
             'job'           => ['required', 'string', 'max:255'],
+            'interest'      => ['required', 'string', 'max:255'],
             'captcha'       => ['required', 'captcha'],
         ], [
             'captcha.captcha' => 'Captcha is invalid'
@@ -51,6 +52,7 @@ class RegistrationController extends Controller
             'telephone' => $request->telephone,
             'company' => $request->company,
             'job' => $request->job,
+            'interest' => $request->interest,
         ]);
 
         return redirect('/send/barcode/' . $user->id);

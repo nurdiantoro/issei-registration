@@ -59,6 +59,13 @@ class RegistrationResource extends Resource
                 TextInput::make('job')
                     ->required()
                     ->maxLength(255),
+                Select::make('interest')
+                    ->required()
+                    ->options([
+                        'Seminar' => 'Seminar',
+                        'Exhibition' => 'Exhibition',
+                        'Seminar & Exhibition' => 'Seminar & Exhibition',
+                    ]),
             ]);
     }
 
@@ -79,6 +86,8 @@ class RegistrationResource extends Resource
                 TextColumn::make('company')
                     ->searchable(),
                 TextColumn::make('job')
+                    ->searchable(),
+                TextColumn::make('interest')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->label('Registration Date')
