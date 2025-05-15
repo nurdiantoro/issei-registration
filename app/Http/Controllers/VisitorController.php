@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VisitorController extends Controller
 {
@@ -27,7 +28,7 @@ class VisitorController extends Controller
             'email' => $user->email,
             'telephone' => $user->telephone,
             'interest' => $user->interest,
-            'gate' => 'Gate 1',
+            'gate' => Auth::user()->name,
         ]);
 
         return redirect()->back()->with('barcode_exists', 'Barcode Found.');
