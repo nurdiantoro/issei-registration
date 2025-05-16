@@ -14,8 +14,8 @@ class VisitorCount extends BaseWidget
     {
         $stats = [];
         $visitors = Visitor::whereNot('name', 'root')
-            ->whereDate('created_at', Carbon::today())
-            ->select('gate', DB::raw('count(*) as today'))
+            // ->whereDate('created_at', Carbon::today())
+            // ->select('gate', DB::raw('count(*) as today'))
             ->groupBy('gate')
             ->get()
             ->sortBy('gate')
