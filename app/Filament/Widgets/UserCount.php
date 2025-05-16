@@ -11,7 +11,7 @@ class UserCount extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Total Registration', User::where('role_id', 'user')->count()),
+            Stat::make('Total Registration', User::where('role_id', 'user')->count())
         ];
     }
 }

@@ -11,7 +11,7 @@ class VisitorController extends Controller
 {
     public function index()
     {
-        $visitors = Visitor::orderBy('created_at', 'desc')->limit(10)->get();
+        $visitors = Visitor::where('gate', Auth::user()->name)->orderBy('created_at', 'desc')->limit(10)->get();
         return view('checkin', compact('visitors'));
     }
 

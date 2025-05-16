@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\VisitorExporter;
 use App\Filament\Resources\VisitorResource\Pages;
 use App\Filament\Resources\VisitorResource\RelationManagers;
 use App\Models\Visitor;
@@ -9,9 +10,11 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Actions\Exports\Enums\ExportFormat;
 
 class VisitorResource extends Resource
 {
@@ -82,6 +85,14 @@ class VisitorResource extends Resource
                 // Tables\Actions\BulkActionGroup::make([
                 //     Tables\Actions\DeleteBulkAction::make(),
                 // ]),
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(VisitorExporter::class)
+                    ->formats([
+                        ExportFormat::Xlsx,
+                    ])
+                    ->fileName(now()->format('d-m-Y') . ' Visitor Database ISSEI2025.xlsx')
             ]);
     }
 

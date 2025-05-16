@@ -4,11 +4,11 @@
     <div class="min-h-screen flex justify-start items-center flex-col bg-cover p-2 before:content-[''] before:fixed before:inset-0 before:bg-[rgba(0,0,0,0.7)] before:z-[10] bg-fixed"
         style="background-image: url('/image/JCC Hall A.jpg')">
 
-        <div class=" flex justify-between mt-8 z-20 w-full xl:px-40">
+        {{-- <div class=" flex justify-between mt-8 z-20 w-full xl:px-40">
             <img src="{{ asset('image/Logo IISIA Putih.png') }}" alt="logo IISIA Putih"
                 class="h-20 lg:h-24 object-contain">
             <img src="{{ asset('image/LOGO SEAISI.png') }}" alt="LOGO SEAISI" class="h-20 lg:h-24 object-contain">
-        </div>
+        </div> --}}
 
         <div class="flex flex-col gap-4 items-center p-2 w-full md:w-1/2 lg:w-1/3 z-20 mt-24">
             <img src="{{ asset('image/LOGO-ISSEI-2025-COLOR-3-BARIS.png') }}" class="h-32" alt="Logo ISSEI 2025">
