@@ -30,6 +30,11 @@ class RegistrationResource extends Resource
 
     protected static ?string $navigationLabel = 'Registration';
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -103,7 +108,9 @@ class RegistrationResource extends Resource
             ])
             ->bulkActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()->visible(fn() => auth()
+                        ->user()
+                        ->role_id == 'root'),
                 ]),
             ])
             ->headerActions([
@@ -113,6 +120,9 @@ class RegistrationResource extends Resource
                         ExportFormat::Xlsx,
                     ])
                     ->fileName(now()->format('d-m-Y') . ' Registration Database ISSEI2025.xlsx')
+                    ->visible(fn() => auth()
+                        ->user()
+                        ->role_id == 'root')
             ]);
     }
 

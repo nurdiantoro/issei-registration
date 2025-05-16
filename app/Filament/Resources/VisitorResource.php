@@ -15,6 +15,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Actions\Exports\Enums\ExportFormat;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
 
 class VisitorResource extends Resource
 {
@@ -82,9 +84,11 @@ class VisitorResource extends Resource
                 // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                // Tables\Actions\BulkActionGroup::make([
-                //     Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()->visible(fn() => auth()
+                        ->user()
+                        ->role_id == 'root'),
+                ]),
             ])
             ->headerActions([
                 ExportAction::make()
@@ -93,6 +97,9 @@ class VisitorResource extends Resource
                         ExportFormat::Xlsx,
                     ])
                     ->fileName(now()->format('d-m-Y') . ' Visitor Database ISSEI2025.xlsx')
+                    ->visible(fn() => auth()
+                        ->user()
+                        ->role_id == 'root')
             ]);
     }
 
