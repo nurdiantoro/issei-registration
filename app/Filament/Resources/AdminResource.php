@@ -61,6 +61,8 @@ class AdminResource extends Resource
                     ->searchable(),
                 TextColumn::make('email')
                     ->searchable(),
+                TextColumn::make('role_id')
+                    ->searchable(),
             ])
             ->filters([])
             ->actions([
