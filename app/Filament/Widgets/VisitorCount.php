@@ -13,22 +13,26 @@ class VisitorCount extends BaseWidget
     protected function getStats(): array
     {
         $stats = [];
-        $visitors = Visitor::whereNot('name', 'root')
-            // ->whereDate('created_at', Carbon::today())
-            // ->select('gate', DB::raw('count(*) as today'))
+        $totalVisitors = Visitor::whereNot('name', 'root')
+            ->select('gate', DB::raw('count(*) as total'))
             ->groupBy('gate')
             ->get()
-            ->sortBy('gate')
             ->keyBy('gate');
 
-        foreach ($visitors as $visitor) {
-            $todayCount = Visitor::where('gate', $visitor->gate)
-                ->whereDate('created_at', Carbon::today())
-                ->count();
+        // Ambil visitor hari ini, grup berdasarkan gate
+        $todayVisitors = Visitor::whereNot('name', 'root')
+            ->whereDate('created_at', Carbon::today())
+            ->select('gate', DB::raw('count(*) as today'))
+            ->groupBy('gate')
+            ->get()
+            ->keyBy('gate');
 
-            $totalCount = Visitor::where('gate', $visitor->gate)->count();
+        // Gabungkan berdasarkan gate
+        foreach ($totalVisitors as $gate => $totalData) {
+            $todayCount = $todayVisitors[$gate]->today ?? 0;
+            $totalCount = $totalData->total;
 
-            $stats[] = Stat::make('Visitor ' . $visitor->gate . ' (Today)', $todayCount)
+            $stats[] = Stat::make('Visitor ' . $gate . ' (Today)', $todayCount)
                 ->description('Total ' . $totalCount)
                 ->color('success');
         }
