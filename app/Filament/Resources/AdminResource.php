@@ -93,4 +93,18 @@ class AdminResource extends Resource
     {
         return parent::getEloquentQuery()->whereIn('role_id', ['root', 'admin']);
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        if (auth()->user()->role_id == 'root') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->role_id == 'root';
+    }
 }

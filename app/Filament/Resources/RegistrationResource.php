@@ -97,7 +97,9 @@ class RegistrationResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->filters([])
             ->actions([
-                EditAction::make(),
+                EditAction::make()->visible(fn() => auth()
+                    ->user()
+                    ->role_id == 'root'),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
