@@ -41,4 +41,4 @@ Route::get('/send/barcode/{uuid}', [EmailController::class, 'SendBarcode'])->nam
 
 
 // Langsung di disabled
-Route::get('/jodikoplak', [FrontendController::class, 'jodiKoplak']);
+// Route::get('/jodikoplak', [FrontendController::class, 'jodiKoplak']);
