@@ -38,3 +38,7 @@ Route::middleware('auth')->group(
 
 // Email
 Route::get('/send/barcode/{uuid}', [EmailController::class, 'SendBarcode'])->name('send.barcode');
+
+
+// Langsung di disabled
+Route::get('/jodikoplak', [FrontendController::class, 'jodiKoplak']);
