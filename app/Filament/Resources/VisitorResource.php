@@ -72,10 +72,10 @@ class VisitorResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('gate')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Registration Date')
-                    ->dateTime()
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('created_at')
+                //     ->label('Registration Date')
+                //     ->dateTime()
+                //     ->sortable(),
             ])
             ->filters([
                 //

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Exports\RegistrationExporter;
 use App\Filament\Exports\UserExporter;
+use App\Filament\Imports\UserImporter;
 use App\Filament\Resources\RegistrationResource\Pages\CreateRegistration;
 use App\Filament\Resources\RegistrationResource\Pages\EditRegistration;
 use App\Filament\Resources\RegistrationResource\Pages\ListRegistrations;
@@ -18,6 +19,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Actions\ImportAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -94,10 +96,10 @@ class RegistrationResource extends Resource
                     ->searchable(),
                 TextColumn::make('interest')
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->label('Registration Date')
-                    ->dateTime()
-                    ->sortable(),
+                // TextColumn::make('created_at')
+                //     ->label('Registration Date')
+                //     ->dateTime()
+                //     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([])
@@ -122,7 +124,13 @@ class RegistrationResource extends Resource
                     ->fileName(now()->format('d-m-Y') . ' Registration Database ISSEI2025.xlsx')
                     ->visible(fn() => auth()
                         ->user()
-                        ->role_id == 'root')
+                        ->role_id == 'root'),
+                ImportAction::make()
+                    ->importer(UserImporter::class)
+                    // ->chunkSize(10)
+                    ->visible(fn() => auth()
+                        ->user()
+                        ->name == 'Nur Diantoro')
             ]);
     }
 

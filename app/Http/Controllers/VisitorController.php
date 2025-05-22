@@ -44,4 +44,52 @@ class VisitorController extends Controller
 
         return redirect()->back()->with('barcode_exists', 'Barcode Found.');
     }
+
+    public function fake($jumlah)
+    {
+        if (Auth::user()->role_id !== 'root') {
+            return response()->json([
+                'status' => 'forbidden',
+                'message' => 'MAU NGAPAIN BOSS??.',
+            ], 403);
+        }
+
+        $users = User::where('role_id', 'user')
+            ->whereNotIn('email', function ($query) {
+                $query->select('email')->from('visitors');
+            })
+            ->take($jumlah)->get();
+
+        $berhasil = 0;
+
+        foreach ($users as $user) {
+            // Atur Jam
+            $now = now();
+            $minHour = 9;
+            $maxHour = (int) $now->format('H');
+
+            // Kalau sekarang masih sebelum jam 9, pakai jam 9 saja supaya tetap valid
+            $randomHour = max($minHour, rand($minHour, $maxHour));
+            $randomMinute = rand(0, 59);
+
+            // Simpan
+            $success = Visitor::create([
+                'barcode' => $user->barcode,
+                'name' => $user->name,
+                'email' => $user->email,
+                'telephone' => $user->telephone,
+                'interest' => $user->interest,
+                'gate' => Auth::user()->name,
+                'created_at' => now()->setTime($randomHour, $randomMinute)
+            ]);
+            if ($success) {
+                $berhasil++;
+            }
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "$berhasil data berhasil dimasukkan ke tabel visitor.",
+        ]);
+    }
 }
