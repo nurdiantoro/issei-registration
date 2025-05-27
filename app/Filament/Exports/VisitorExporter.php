@@ -17,6 +17,7 @@ class VisitorExporter extends Exporter
             ExportColumn::make('barcode'),
             ExportColumn::make('name'),
             ExportColumn::make('email'),
+            ExportColumn::make('user.company')->label('Company'),
             ExportColumn::make('telephone'),
             ExportColumn::make('interest'),
             ExportColumn::make('gate'),

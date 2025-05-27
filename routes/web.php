@@ -7,6 +7,8 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\VisitorController;
+use App\Models\User;
+use App\Models\Visitor;
 use Illuminate\Support\Facades\Route;
 
 
@@ -40,3 +42,13 @@ Route::middleware('auth')->group(
 Route::get('/send/barcode/{uuid}', [EmailController::class, 'SendBarcode'])->name('send.barcode');
 
 Route::get('/fake/check-in/{jumlah}', [VisitorController::class, 'fake']);
+
+Route::get('/test-relasi', function () {
+    $visitor = Visitor::first();
+
+    return [
+        'visitor_email' => $visitor->email,
+        'matching_user' => User::where('email', $visitor->email)->first(),
+        'relasi_user' => $visitor->company,
+    ];
+});

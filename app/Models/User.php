@@ -61,4 +61,14 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->role_id === 'admin' || $this->role_id === 'root';
     }
+
+    public function visitor()
+    {
+        return $this->hasOne(Visitor::class, 'email', 'email');
+    }
+
+    public function visitors()
+    {
+        return $this->hasMany(Visitor::class, 'email', 'email');
+    }
 }

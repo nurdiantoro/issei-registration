@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Exports\VisitorExporter;
 use App\Filament\Resources\VisitorResource\Pages;
 use App\Filament\Resources\VisitorResource\RelationManagers;
+use App\Models\User;
 use App\Models\Visitor;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -59,12 +60,18 @@ class VisitorResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(
+                static::getModel()::query()->with('user')
+            )
             ->columns([
                 Tables\Columns\TextColumn::make('barcode')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('user.company')
+                    ->label('Company')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('telephone')
                     ->searchable(),
